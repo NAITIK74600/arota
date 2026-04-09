@@ -1,15 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Search, Clock, User } from "lucide-react";
 import Link from "next/link";
-
-const ScrollMorphHero = dynamic(
-  () => import("@/components/ui/scroll-morph-hero"),
-  { ssr: false, loading: () => <div className="w-full h-screen" /> }
-);
 
 const categories = ["All", "Design", "Engineering", "VFX & 3D", "Strategy"] as const;
 type BlogCategory = (typeof categories)[number];
@@ -25,10 +19,21 @@ const ease = "easeOut" as const;
 function BlogHero() {
   return (
     <section className="relative w-full" style={{ height: "100dvh" }}>
-      {/* Morph animation fills the full hero */}
-      <div className="absolute inset-0">
-        <ScrollMorphHero />
-      </div>
+      {/* Animated CSS background — no scroll capture */}
+      <div className="absolute inset-0 grid-bg opacity-30" />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 90% 80% at 50% -10%, oklch(65% 0.25 250 / 10%) 0%, oklch(65% 0.28 290 / 6%) 40%, transparent 70%)" }} />
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{ opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ background: "radial-gradient(ellipse 60% 50% at 30% 60%, oklch(65% 0.28 290 / 8%), transparent 60%)" }}
+      />
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        animate={{ opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        style={{ background: "radial-gradient(ellipse 50% 60% at 70% 40%, oklch(65% 0.28 330 / 6%), transparent 60%)" }}
+      />
       {/* Overlay text */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
         <motion.div

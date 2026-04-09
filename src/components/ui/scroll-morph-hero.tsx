@@ -142,8 +142,8 @@ export default function ScrollMorphHero() {
     const container = containerRef.current;
     if (!container) return;
 
+    // Passive listeners so native page scroll is never blocked
     const handleWheel = (e: WheelEvent) => {
-      e.preventDefault();
       const newScroll = Math.min(Math.max(scrollRef.current + e.deltaY, 0), MAX_SCROLL);
       scrollRef.current = newScroll;
       virtualScroll.set(newScroll);
@@ -162,9 +162,9 @@ export default function ScrollMorphHero() {
       virtualScroll.set(newScroll);
     };
 
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    container.addEventListener("touchstart", handleTouchStart, { passive: false });
-    container.addEventListener("touchmove", handleTouchMove, { passive: false });
+    container.addEventListener("wheel", handleWheel, { passive: true });
+    container.addEventListener("touchstart", handleTouchStart, { passive: true });
+    container.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     return () => {
       container.removeEventListener("wheel", handleWheel);

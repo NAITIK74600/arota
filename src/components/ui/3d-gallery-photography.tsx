@@ -239,16 +239,6 @@ function GalleryScene({
     }));
   }, [depthRange, spatialPositions, totalImages, visibleCount]);
 
-  const handleWheel = useCallback(
-    (event: WheelEvent) => {
-      event.preventDefault();
-      setScrollVelocity((prev) => prev + event.deltaY * 0.01 * speed);
-      setAutoPlay(false);
-      lastInteraction.current = Date.now();
-    },
-    [speed]
-  );
-
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
@@ -265,16 +255,12 @@ function GalleryScene({
   );
 
   useEffect(() => {
-    const canvas = document.querySelector("canvas");
-    if (canvas) {
-      canvas.addEventListener("wheel", handleWheel, { passive: false });
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        canvas.removeEventListener("wheel", handleWheel);
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    }
-  }, [handleWheel, handleKeyDown]);
+    // Only keyboard control — wheel listener removed to prevent blocking page scroll
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   useEffect(() => {
     const interval = setInterval(() => {
