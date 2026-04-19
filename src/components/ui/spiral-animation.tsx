@@ -35,7 +35,7 @@ class AnimationController {
     this.ctx = ctx;
     this.dpr = dpr;
     this.size = size;
-    this.timeline = gsap.timeline({ repeat: -1 });
+    this.timeline = gsap.timeline();
     this.setupStars();
     this.setupTimeline();
   }
@@ -54,7 +54,7 @@ class AnimationController {
   }
 
   private setupTimeline() {
-    this.timeline.to(this, { time: 1, duration: 15, repeat: -1, ease: 'none', onUpdate: () => this.render() });
+    this.timeline.to(this, { time: 1, duration: 3.5, ease: 'none', onUpdate: () => this.render() });
   }
 
   ease(p: number, g: number): number {
@@ -264,7 +264,7 @@ export function SpiralAnimation() {
   }, [dimensions]);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="absolute inset-0">
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
     </div>
   );

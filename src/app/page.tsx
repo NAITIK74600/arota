@@ -86,7 +86,7 @@ function SpiralIntro({ onEnter }: { onEnter: () => void }) {
 
   useEffect(() => {
     const delayId = setTimeout(() => {
-      const duration = 2600;
+      const duration = 1000;
       const start = Date.now();
       const tick = () => {
         const p = Math.min((Date.now() - start) / duration, 1);
@@ -95,10 +95,12 @@ function SpiralIntro({ onEnter }: { onEnter: () => void }) {
           rafRef.current = requestAnimationFrame(tick);
         } else {
           setReady(true);
+          // Auto-proceed after a short pause
+          setTimeout(() => onEnter(), 700);
         }
       };
       rafRef.current = requestAnimationFrame(tick);
-    }, 500);
+    }, 300);
 
     return () => {
       clearTimeout(delayId);
@@ -108,11 +110,10 @@ function SpiralIntro({ onEnter }: { onEnter: () => void }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[999] bg-black flex items-center justify-center cursor-pointer"
+      className="fixed inset-0 z-[999] bg-black flex items-center justify-center"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.04 }}
-      transition={{ duration: 1.3, ease: "easeInOut" }}
-      onClick={ready ? onEnter : undefined}
+      exit={{ opacity: 0, scale: 1.03 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
     >
       {/* Spiral canvas background */}
       <SpiralAnimation />
@@ -170,9 +171,9 @@ function SpiralIntro({ onEnter }: { onEnter: () => void }) {
           <motion.p
             className="text-[10px] tracking-[0.45em] uppercase font-light"
             animate={{ color: ready ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.2)" }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.4 }}
           >
-            {ready ? "Tap to begin" : "Initializing"}
+            {ready ? "Entering" : "Initializing"}
           </motion.p>
 
           {/* Animated vertical line */}
