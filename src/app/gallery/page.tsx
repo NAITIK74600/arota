@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import InfiniteGallery from "@/components/ui/3d-gallery-photography";
 
 const GALLERY_IMAGES = [
@@ -26,8 +28,66 @@ const GALLERY_IMAGES = [
 ];
 
 export default function GalleryPage() {
+  const router = useRouter();
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back();
+      return;
+    }
+    router.push("/");
+  };
+
+  const navButtonClass =
+    "inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs tracking-[0.14em] uppercase transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[oklch(65%_0.28_290_/_45%)]";
+
+  const navButtonStyle = {
+    background: "oklch(10% 0.018 270 / 85%)",
+    border: "1px solid oklch(24% 0.028 270)",
+    color: "oklch(86% 0.005 270)",
+    backdropFilter: "blur(8px)",
+    boxShadow: "0 0 0 oklch(65% 0.28 290 / 0)",
+  };
+
   return (
     <main className="min-h-screen h-full w-full bg-black">
+      <div className="fixed top-5 left-5 z-20 flex items-center gap-2">
+        <button
+          type="button"
+          onClick={handleBack}
+          className={navButtonClass}
+          style={navButtonStyle}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = "oklch(65% 0.28 290 / 45%)";
+            e.currentTarget.style.boxShadow = "0 0 24px oklch(65% 0.28 290 / 30%)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "oklch(24% 0.028 270)";
+            e.currentTarget.style.boxShadow = "0 0 0 oklch(65% 0.28 290 / 0)";
+          }}
+        >
+          <ArrowLeft size={14} />
+          Back
+        </button>
+
+        <button
+          type="button"
+          onClick={() => router.push("/")}
+          className={navButtonClass}
+          style={navButtonStyle}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = "oklch(65% 0.28 290 / 45%)";
+            e.currentTarget.style.boxShadow = "0 0 24px oklch(65% 0.28 290 / 30%)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = "oklch(24% 0.028 270)";
+            e.currentTarget.style.boxShadow = "0 0 0 oklch(65% 0.28 290 / 0)";
+          }}
+        >
+          Home
+        </button>
+      </div>
+
       <InfiniteGallery
         images={GALLERY_IMAGES}
         speed={1.2}
