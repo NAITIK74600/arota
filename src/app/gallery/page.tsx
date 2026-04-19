@@ -98,7 +98,7 @@ export default function GalleryPage() {
       {/* Overlay title */}
       <div className="fixed inset-0 pointer-events-none flex items-center justify-center text-center px-3 mix-blend-exclusion text-white z-10">
         <h1 className="font-serif text-4xl md:text-7xl tracking-tight select-none">
-          <span className="italic">Arota</span>
+          <span style={{ fontFamily: "var(--font-dancing-script)", fontSize: "inherit" }}>soft-era</span>
         </h1>
       </div>
 

@@ -1,66 +1,89 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight, Globe, Layers3, Rocket, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
-const InfiniteGallery = dynamic(
-  () => import("@/components/ui/3d-gallery-photography"),
-  { ssr: false, loading: () => <div className="w-full h-full" /> }
-);
-
-const ScrollExpandMedia = dynamic(
-  () => import("@/components/blocks/scroll-expansion-hero"),
-  { ssr: false, loading: () => <div className="w-full min-h-screen" /> }
-);
-
-const WORK_GALLERY_IMAGES = [
-  { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&q=80", alt: "Architecture" },
-  { src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80", alt: "Office" },
-  { src: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=500&q=80", alt: "Interior" },
-  { src: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500&q=80", alt: "Tech" },
-  { src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&q=80", alt: "Woods" },
-  { src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=500&q=80", alt: "Valley" },
-  { src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&q=80", alt: "Space" },
-  { src: "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=500&q=80", alt: "Animal" },
-  { src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&q=80", alt: "Nature" },
-  { src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500&q=80", alt: "Landscape" },
-];
-
-const categories = ["All", "Live Demo"] as const;
+const categories = ["All", "Live Production"] as const;
 type Category = (typeof categories)[number];
 
 const projects = [
   {
     id: 1,
     title: "Batla Medicos",
-    category: "Live Demo" as Category,
+    category: "Live Production" as Category,
     year: "2026",
-    desc: "Arota's first live production launch. This site is our current proof of execution and the reference point for future client work.",
+    image: "/images/batla-medicos-preview.jpg",
+    desc: "soft-era's first live production launch. This project is our active portfolio proof, built for real users and shipped with deployment-first thinking.",
     result: "Live at batlamedicos.shop",
-    deliverables: ["Design Direction", "Frontend Build", "Responsive Pages", "Production Launch"],
+    deliverables: ["UI System", "Frontend Build", "Responsive QA", "Launch & Deployment"],
     accent: "oklch(65% 0.25 250)",
+    metrics: [
+      { label: "Type", value: "Live Website" },
+      { label: "Status", value: "Production" },
+      { label: "Stack", value: "Next.js" },
+    ],
+  },
+];
+
+const process = [
+  {
+    icon: Layers3,
+    title: "Design Direction",
+    text: "We align layout, typography, and content hierarchy to support the business goal before development starts.",
+  },
+  {
+    icon: Rocket,
+    title: "Build & Delivery",
+    text: "The interface is engineered as reusable sections and production-ready components with responsive behavior built in.",
+  },
+  {
+    icon: Globe,
+    title: "Launch Reality",
+    text: "Final output is shipped, publicly accessible, and tested as a real website, not just a local demo or mock case study.",
   },
 ];
 
 function WorkHero() {
   return (
-    <section className="relative pt-36 pb-12 px-6 md:px-12 overflow-hidden">
-      <div className="absolute inset-0 grid-bg opacity-25" />
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 70% at 50% -10%, oklch(65% 0.28 330 / 12%) 0%, transparent 60%)" }} />
+    <section className="relative pt-36 pb-16 px-6 md:px-12 overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-20" />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 85% 65% at 50% -10%, oklch(65% 0.28 330 / 14%) 0%, transparent 62%)" }} />
+
       <div className="max-w-6xl mx-auto">
-        <motion.div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs tracking-[0.18em] uppercase mb-5 glass" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} style={{ color: "oklch(65% 0.28 330)" }}>
+        <motion.div
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs tracking-[0.18em] uppercase mb-6 glass"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          style={{ color: "oklch(65% 0.28 330)" }}
+        >
           <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-          Selected Work · {projects.length} Live Launch
+          Work Archive · {projects.length} Live Project
         </motion.div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
-          <motion.h1 className="text-5xl md:text-7xl font-black leading-[1.02]" style={{ fontFamily: "var(--font-sora-var)" }} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}>
-            Real output, <span className="text-gradient">not placeholders.</span>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 items-end">
+          <motion.h1
+            className="text-5xl md:text-7xl font-black leading-[0.98] tracking-tight"
+            style={{ fontFamily: "var(--font-sora-var)" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: [0.33, 1, 0.68, 1] }}
+          >
+            Work that ships.<br />
+            <span className="text-gradient">Work that stays live.</span>
           </motion.h1>
-          <motion.p className="text-base leading-relaxed max-w-md" style={{ color: "oklch(55% 0.01 270)" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-            This portfolio currently shows one live website because that's the truthful state of the studio today. Batla Medicos is live, public, and available as a working demo.
+
+          <motion.p
+            className="text-base md:text-lg leading-relaxed max-w-lg"
+            style={{ color: "oklch(55% 0.01 270)" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.1 }}
+          >
+            We prioritize real launch outcomes over decorative portfolios. Every project here is shown with accurate context, actual deployment state, and production intent.
           </motion.p>
         </div>
       </div>
@@ -68,33 +91,188 @@ function WorkHero() {
   );
 }
 
-function ProjectCard({ project, index, onClick }: { project: (typeof projects)[number]; index: number; onClick: () => void }) {
+function FeaturedCaseStudy() {
+  const project = projects[0];
+
+  return (
+    <section className="px-6 md:px-12 pb-16">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          className="rounded-3xl overflow-hidden"
+          style={{ background: "oklch(11% 0.018 270)", border: "1px solid oklch(20% 0.025 270)" }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="relative min-h-[300px] lg:min-h-[420px]">
+              <Image
+                src={project.image}
+                alt="Batla Medicos live website preview"
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover object-top"
+                unoptimized
+              />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, oklch(11% 0.018 270 / 30%), transparent 45%)" }} />
+              <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full text-[10px] tracking-[0.18em] uppercase" style={{ background: "oklch(8% 0.015 270 / 78%)", color: project.accent, border: `1px solid ${project.accent.replace(")", " / 35%)")}` }}>
+                Featured Case Study
+              </div>
+            </div>
+
+            <div className="p-8 lg:p-10 flex flex-col justify-between">
+              <div>
+                <div className="text-xs tracking-[0.18em] uppercase mb-2" style={{ color: project.accent }}>
+                  {project.category}
+                </div>
+                <h2 className="text-3xl md:text-4xl font-black mb-4" style={{ fontFamily: "var(--font-sora-var)" }}>
+                  {project.title}
+                </h2>
+                <p className="text-sm leading-relaxed mb-6" style={{ color: "oklch(56% 0.01 270)" }}>
+                  {project.desc}
+                </p>
+
+                <div className="grid grid-cols-3 gap-3 mb-7">
+                  {project.metrics.map((item) => (
+                    <div key={item.label} className="rounded-xl p-3 text-center" style={{ background: "oklch(14% 0.02 270)", border: "1px solid oklch(20% 0.025 270)" }}>
+                      <div className="text-sm font-semibold" style={{ color: "oklch(84% 0.01 270)" }}>{item.value}</div>
+                      <div className="text-[10px] mt-1" style={{ color: "oklch(42% 0.01 270)" }}>{item.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {project.deliverables.map((item) => (
+                    <span key={item} className="px-2.5 py-1 rounded-lg text-xs" style={{ background: "oklch(16% 0.02 270)", color: "oklch(60% 0.01 270)", border: "1px solid oklch(22% 0.025 270)" }}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <a href="https://batlamedicos.shop/" target="_blank" rel="noreferrer">
+                  <motion.span
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+                    style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290), oklch(65% 0.28 330))" }}
+                    whileHover={{ scale: 1.03, boxShadow: "0 0 30px oklch(65% 0.28 290 / 40%)" }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: "spring", stiffness: 420, damping: 22 }}
+                  >
+                    Open Live Demo <ArrowUpRight size={15} />
+                  </motion.span>
+                </a>
+
+                <Link href="/#contact">
+                  <motion.span
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold"
+                    style={{ background: "oklch(14% 0.02 270)", color: "oklch(76% 0.01 270)", border: "1px solid oklch(24% 0.028 270)" }}
+                    whileHover={{ scale: 1.03, borderColor: "oklch(65% 0.28 290 / 40%)" }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ type: "spring", stiffness: 420, damping: 22 }}
+                  >
+                    Start Similar Project
+                  </motion.span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function DeliveryProcess() {
+  return (
+    <section className="px-6 md:px-12 py-16 border-t" style={{ borderColor: "oklch(18% 0.022 270)" }}>
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          className="mb-10"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+        >
+          <p className="text-xs tracking-[0.18em] uppercase mb-3" style={{ color: "oklch(65% 0.25 250)" }}>
+            Delivery Standard
+          </p>
+          <h3 className="text-3xl md:text-4xl font-black" style={{ fontFamily: "var(--font-sora-var)" }}>
+            Structured process, professional output.
+          </h3>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {process.map((item, index) => {
+            const Icon = item.icon;
+            return (
+              <motion.article
+                key={item.title}
+                className="rounded-2xl p-6"
+                style={{ background: "oklch(12% 0.018 270)", border: "1px solid oklch(20% 0.025 270)" }}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                whileHover={{ y: -4, borderColor: "oklch(65% 0.28 290 / 35%)" }}
+              >
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: "oklch(65% 0.28 290 / 12%)", color: "oklch(65% 0.28 290)" }}>
+                  <Icon size={18} />
+                </div>
+                <h4 className="text-lg font-bold mb-2" style={{ fontFamily: "var(--font-sora-var)" }}>{item.title}</h4>
+                <p className="text-sm leading-relaxed" style={{ color: "oklch(54% 0.01 270)" }}>{item.text}</p>
+              </motion.article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({
+  project,
+  index,
+  onClick,
+}: {
+  project: (typeof projects)[number];
+  index: number;
+  onClick: () => void;
+}) {
   return (
     <motion.article
       className="group relative rounded-2xl overflow-hidden cursor-pointer"
       style={{ background: "oklch(12% 0.018 270)", border: "1px solid oklch(20% 0.025 270)" }}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.33, 1, 0.68, 1] }}
-      whileHover={{ y: -5, borderColor: project.accent.replace(")", " / 35%)") }}
+      transition={{ duration: 0.35, delay: index * 0.06 }}
+      whileHover={{ y: -4, borderColor: project.accent.replace(")", " / 38%)") }}
       onClick={onClick}
-      data-cursor
     >
-      {/* Visual header */}
-      <div className="h-44 relative overflow-hidden flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${project.accent.replace(")", " / 15%)")}, oklch(10% 0.015 270))` }}>
-        <div className="absolute inset-0 grid-bg opacity-25" />
-        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 70% at 50% 50%, ${project.accent.replace(")", " / 20%)")}, transparent)` }} />
-        <div className="absolute top-4 left-4 text-xs font-mono" style={{ color: project.accent.replace(")", " / 60%)") }}>{project.year}</div>
-        <motion.div className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: project.accent.replace(")", " / 20%)"), color: project.accent }}>
-          <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
-        </motion.div>
+      <div className="relative" style={{ aspectRatio: "16/9" }}>
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          unoptimized
+        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, oklch(11% 0.018 270 / 40%), transparent 55%)" }} />
+        <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-mono" style={{ background: "oklch(8% 0.015 270 / 82%)", color: "oklch(42% 0.01 270)" }}>
+          {project.year}
+        </div>
       </div>
 
-      {/* Content */}
       <div className="p-5">
-        <span className="text-xs px-2.5 py-1 rounded-lg mb-3 inline-block" style={{ background: project.accent.replace(")", " / 12%)"), color: project.accent }}>{project.category}</span>
-        <h3 className="text-base font-bold mb-2 leading-snug" style={{ fontFamily: "var(--font-sora-var)" }}>{project.title}</h3>
-        <p className="text-xs leading-relaxed mb-3" style={{ color: "oklch(50% 0.01 270)" }}>{project.desc.slice(0, 90)}…</p>
+        <span className="text-xs px-2.5 py-1 rounded-lg mb-3 inline-block" style={{ background: project.accent.replace(")", " / 12%)"), color: project.accent }}>
+          {project.category}
+        </span>
+        <h3 className="text-lg font-bold mb-2" style={{ fontFamily: "var(--font-sora-var)" }}>{project.title}</h3>
+        <p className="text-sm leading-relaxed mb-3" style={{ color: "oklch(52% 0.01 270)" }}>
+          {project.desc.slice(0, 110)}…
+        </p>
         <div className="text-xs font-semibold" style={{ color: project.accent }}>{project.result}</div>
       </div>
     </motion.article>
@@ -103,40 +281,55 @@ function ProjectCard({ project, index, onClick }: { project: (typeof projects)[n
 
 function ProjectModal({ project, onClose }: { project: (typeof projects)[number]; onClose: () => void }) {
   return (
-    <motion.div className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+    <motion.div
+      className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
       <div className="absolute inset-0" style={{ background: "oklch(4% 0.01 270 / 88%)", backdropFilter: "blur(8px)" }} />
       <motion.div
         className="relative w-full max-w-xl rounded-3xl overflow-hidden"
         style={{ background: "oklch(12% 0.018 270)", border: "1px solid oklch(24% 0.028 270)" }}
-        initial={{ y: 60, scale: 0.95, opacity: 0 }}
+        initial={{ y: 40, scale: 0.96, opacity: 0 }}
         animate={{ y: 0, scale: 1, opacity: 1 }}
-        exit={{ y: 60, scale: 0.95, opacity: 0 }}
-        transition={{ type: "spring", stiffness: 400, damping: 35 }}
+        exit={{ y: 40, scale: 0.96, opacity: 0 }}
+        transition={{ type: "spring", stiffness: 380, damping: 30 }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="h-36 relative" style={{ background: `linear-gradient(135deg, ${project.accent.replace(")", " / 20%)")}, oklch(10% 0.015 270))` }}>
-          <div className="absolute inset-0 grid-bg opacity-30" />
-          <button className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center" style={{ background: "oklch(15% 0.02 270 / 80%)", color: "oklch(60% 0.01 270)" }} onClick={onClose} data-cursor>
+        <div className="relative" style={{ aspectRatio: "16/8" }}>
+          <Image src={project.image} alt={project.title} fill sizes="768px" className="object-cover object-top" unoptimized />
+          <button
+            className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center"
+            style={{ background: "oklch(15% 0.02 270 / 80%)", color: "oklch(60% 0.01 270)" }}
+            onClick={onClose}
+          >
             <X size={16} />
           </button>
-          <div className="absolute bottom-4 left-6 text-xs font-mono" style={{ color: project.accent }}>{project.year}</div>
         </div>
+
         <div className="p-8">
-          <span className="text-xs px-2.5 py-1 rounded-lg inline-block mb-3" style={{ background: project.accent.replace(")", " / 12%)"), color: project.accent }}>{project.category}</span>
           <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "var(--font-sora-var)" }}>{project.title}</h2>
-          <p className="text-sm leading-relaxed mb-4" style={{ color: "oklch(58% 0.01 270)" }}>{project.desc}</p>
-          <div className="text-sm font-semibold mb-5" style={{ color: project.accent }}>{project.result}</div>
-          <div className="mb-6">
-            <div className="text-xs mb-2" style={{ color: "oklch(40% 0.01 270)" }}>Deliverables</div>
-            <div className="flex flex-wrap gap-2">
-              {project.deliverables.map((d) => <span key={d} className="px-2.5 py-1 rounded-lg text-xs" style={{ background: "oklch(16% 0.02 270)", color: "oklch(60% 0.01 270)", border: "1px solid oklch(22% 0.025 270)" }}>{d}</span>)}
-            </div>
+          <p className="text-sm leading-relaxed mb-5" style={{ color: "oklch(58% 0.01 270)" }}>{project.desc}</p>
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.deliverables.map((d) => (
+              <span key={d} className="px-2.5 py-1 rounded-lg text-xs" style={{ background: "oklch(16% 0.02 270)", color: "oklch(60% 0.01 270)", border: "1px solid oklch(22% 0.025 270)" }}>
+                {d}
+              </span>
+            ))}
           </div>
-          <Link href="/#contact" data-cursor>
-            <motion.span className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white" style={{ background: `linear-gradient(135deg, ${project.accent}, oklch(65% 0.28 330))` }} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-              Start similar project <ArrowUpRight size={15} />
+          <a href="https://batlamedicos.shop/" target="_blank" rel="noreferrer">
+            <motion.span
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+              style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290), oklch(65% 0.28 330))" }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 420, damping: 22 }}
+            >
+              Open live demo <ArrowUpRight size={15} />
             </motion.span>
-          </Link>
+          </a>
         </div>
       </motion.div>
     </motion.div>
@@ -152,91 +345,51 @@ export function WorkPage() {
   return (
     <>
       <WorkHero />
+      <FeaturedCaseStudy />
+      <DeliveryProcess />
 
-      {/* Cinematic featured project reveal — scroll to expand */}
-      <ScrollExpandMedia
-        mediaType="image"
-        mediaSrc="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1400&q=80"
-        bgImageSrc="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80"
-        title="Batla Medicos"
-        date="2026 · Live Demo"
-        scrollToExpand="Scroll to explore the live launch"
-        textBlend
-      />
-
-      {/* 3D Gallery banner */}
-      <div className="relative w-full overflow-hidden" style={{ height: 420 }}>
-        <InfiniteGallery
-          images={WORK_GALLERY_IMAGES}
-          speed={0.8}
-          visibleCount={10}
-          className="w-full h-full"
-        />
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center mix-blend-exclusion">
-          <span className="font-serif text-5xl md:text-7xl italic text-white select-none opacity-90 tracking-tight">
-            Batla Medicos
-          </span>
-        </div>
-        {/* Gradient fade to page bg */}
-        <div className="absolute inset-x-0 bottom-0 h-20 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, oklch(8% 0.015 270))" }} />
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 md:px-12 pb-24">
-        {/* Sticky filter bar */}
-        <div className="sticky top-16 z-30 -mx-6 md:-mx-12 px-6 md:px-12 py-4 mb-10" style={{ background: "oklch(8% 0.015 270 / 90%)", backdropFilter: "blur(16px)", borderBottom: "1px solid oklch(18% 0.022 270 / 60%)" }}>
-          <div className="max-w-6xl mx-auto flex gap-2 flex-wrap">
-            {categories.map((cat) => (
-              <motion.button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className="px-4 py-2 rounded-full text-xs font-semibold"
-                style={activeFilter === cat
-                  ? { background: "oklch(65% 0.28 290 / 18%)", color: "oklch(65% 0.28 290)", border: "1px solid oklch(65% 0.28 290 / 40%)" }
-                  : { background: "oklch(14% 0.02 270)", color: "oklch(50% 0.01 270)", border: "1px solid oklch(22% 0.025 270)" }
-                }
-                whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
-                data-cursor
-              >
-                {cat}
-                <span className="ml-1.5 opacity-50 text-[10px]">{cat === "All" ? projects.length : projects.filter((p) => p.category === cat).length}</span>
-              </motion.button>
-            ))}
+      <section className="px-6 md:px-12 py-16 border-t" style={{ borderColor: "oklch(18% 0.022 270)" }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="sticky top-16 z-30 -mx-6 md:-mx-12 px-6 md:px-12 py-4 mb-8" style={{ background: "oklch(8% 0.015 270 / 90%)", backdropFilter: "blur(16px)", borderBottom: "1px solid oklch(18% 0.022 270 / 60%)" }}>
+            <div className="max-w-6xl mx-auto flex gap-2 flex-wrap">
+              {categories.map((cat) => (
+                <motion.button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className="px-4 py-2 rounded-full text-xs font-semibold"
+                  style={
+                    activeFilter === cat
+                      ? { background: "oklch(65% 0.28 290 / 18%)", color: "oklch(65% 0.28 290)", border: "1px solid oklch(65% 0.28 290 / 40%)" }
+                      : { background: "oklch(14% 0.02 270)", color: "oklch(50% 0.01 270)", border: "1px solid oklch(22% 0.025 270)" }
+                  }
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 22 }}
+                >
+                  {cat}
+                </motion.button>
+              ))}
+            </div>
           </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeFilter}
+              className="grid grid-cols-1 md:grid-cols-2 gap-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              {filtered.map((project, i) => (
+                <ProjectCard key={project.id} project={project} index={i} onClick={() => setSelected(project)} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
+      </section>
 
-        {/* Project grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeFilter}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {filtered.map((project, i) => (
-              <ProjectCard key={project.id} project={project} index={i} onClick={() => setSelected(project)} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* CTA */}
-        <motion.div className="text-center mt-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <p className="text-base font-semibold mb-6" style={{ color: "oklch(55% 0.01 270)" }}>
-            Want to review the live build?
-          </p>
-          <a href="https://batlamedicos.shop/" target="_blank" rel="noreferrer" data-cursor>
-            <motion.span className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-white" style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290), oklch(65% 0.28 330))" }} whileHover={{ scale: 1.04, boxShadow: "0 0 40px oklch(65% 0.28 290 / 50%)" }} whileTap={{ scale: 0.97 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-              Open live demo <ArrowUpRight size={16} />
-            </motion.span>
-          </a>
-        </motion.div>
-      </div>
-
-      <AnimatePresence>
-        {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
-      </AnimatePresence>
+      <AnimatePresence>{selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}</AnimatePresence>
     </>
   );
 }

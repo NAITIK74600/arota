@@ -9,9 +9,9 @@ const categories = ["All", "Design", "Engineering", "VFX & 3D", "Strategy"] as c
 type BlogCategory = (typeof categories)[number];
 
 const articles = [
-  { id: 1, title: "Why Arota launches with only one public case study", category: "Strategy" as BlogCategory, author: "Arota", date: "Apr 2026", readTime: "4 min", excerpt: "This studio is new, and the site should say that plainly. Here's why we removed invented numbers and chose to anchor the portfolio around one real live project.", accent: "oklch(65% 0.28 290)", featured: true },
-  { id: 2, title: "Batla Medicos: the first live Arota build", category: "Engineering" as BlogCategory, author: "Arota", date: "Apr 2026", readTime: "5 min", excerpt: "A short build note on the first production website shipped under the Arota name and how it is now used as the studio's public live demo.", accent: "oklch(65% 0.25 250)" },
-  { id: 3, title: "Writing production copy without fake proof", category: "Design" as BlogCategory, author: "Arota", date: "Apr 2026", readTime: "3 min", excerpt: "Design polish matters, but credibility matters more. This note covers how we handle copy when the real portfolio is still small and growing.", accent: "oklch(72% 0.22 210)" },
+  { id: 1, title: "Why soft-era launches with only one public case study", category: "Strategy" as BlogCategory, author: "soft-era", date: "Apr 2026", readTime: "4 min", excerpt: "This studio is new, and the site should say that plainly. Here's why we removed invented numbers and chose to anchor the portfolio around one real live project.", accent: "oklch(65% 0.28 290)", featured: true },
+  { id: 2, title: "Batla Medicos: the first live soft-era build", category: "Engineering" as BlogCategory, author: "soft-era", date: "Apr 2026", readTime: "5 min", excerpt: "A short build note on the first production website shipped under the soft-era name and how it is now used as the studio's public live demo.", accent: "oklch(65% 0.25 250)" },
+  { id: 3, title: "Writing production copy without fake proof", category: "Design" as BlogCategory, author: "soft-era", date: "Apr 2026", readTime: "3 min", excerpt: "Design polish matters, but credibility matters more. This note covers how we handle copy when the real portfolio is still small and growing.", accent: "oklch(72% 0.22 210)" },
 ];
 
 const ease = "easeOut" as const;

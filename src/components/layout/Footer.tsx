@@ -33,9 +33,9 @@ const nav = {
     { label: "Motion Graphics",   href: "/services" },
   ],
   Legal: [
-    { label: "Privacy Policy",    href: "#" },
-    { label: "Terms of Service",  href: "#" },
-    { label: "Cookie Policy",     href: "#" },
+    { label: "Privacy Policy",    href: "/privacy-policy" },
+    { label: "Terms of Service",  href: "/terms-of-service" },
+    { label: "Cookie Policy",     href: "/cookie-policy" },
   ],
 };
 
@@ -56,8 +56,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-14">
           <div>
             <Link href="/" className="inline-flex items-center gap-3 mb-4 group" data-cursor>
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-black text-white" style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290), oklch(65% 0.28 330))" }}>A</div>
-              <span className="text-2xl font-bold" style={{ fontFamily: "var(--font-sora-var)" }}>Arota</span>
+              <span
+                className="text-white transition-opacity group-hover:opacity-75"
+                style={{ fontFamily: "var(--font-dancing-script)", fontSize: "2.25rem", lineHeight: 1 }}
+              >
+                soft-era
+              </span>
             </Link>
             <p className="text-sm leading-relaxed max-w-64" style={{ color: "oklch(50% 0.01 270)" }}>
               A full-service creative studio. We design, build, and produce digital experiences that command attention.
@@ -124,7 +128,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <p className="text-xs" style={{ color: "oklch(35% 0.01 270)" }}>
-            © {new Date().getFullYear()} Arota Studio. All rights reserved.
+            © {new Date().getFullYear()} soft-era Studio. All rights reserved.
           </p>
           <p className="text-xs" style={{ color: "oklch(35% 0.01 270)" }}>
             Crafted with obsession. Built with Next.js.

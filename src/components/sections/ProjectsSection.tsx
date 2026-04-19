@@ -13,7 +13,7 @@ const projects = [
     year: "2026",
     url: "https://batlamedicos.shop/",
     image: "/images/batla-medicos-preview.jpg",
-    desc: "The first live production website delivered by Arota Studio — a full-featured medical retail storefront built and shipped end-to-end. This build anchors our public portfolio while the studio scales.",
+    desc: "The first live production website delivered by soft-era Studio — a full-featured medical retail storefront built and shipped end-to-end. This build anchors our public portfolio while the studio scales.",
     result: "Live at batlamedicos.shop",
     accent: "oklch(65% 0.25 250)",
     accentGrad: "linear-gradient(135deg, oklch(65% 0.25 250), oklch(65% 0.28 290))",

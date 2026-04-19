@@ -3,7 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Sparkles, Wand2, Layers3 } from "lucide-react";
 import Link from "next/link";
 
 const LampContainer = dynamic(
@@ -32,7 +32,7 @@ const services = [
     pricing: "Custom quote",
     deliverables: ["Visual Direction", "Logo Refresh", "Color System", "Typography Pairing", "Component Language", "Launch Assets"],
     process: ["Audit the brand", "Set the direction", "Build the system", "Apply it to pages", "Prepare launch assets"],
-    caseStudy: { title: "Arota launch system → in active use", href: "/" },
+    caseStudy: { title: "soft-era launch system → in active use", href: "/" },
   },
   {
     id: "03",
@@ -48,7 +48,7 @@ const services = [
 ];
 
 const faqs = [
-  { q: "Are you an established studio or a new startup agency?", a: "Arota is a startup agency established in 2026. We prefer stating that clearly rather than inflating experience claims." },
+  { q: "Are you an established studio or a new startup agency?", a: "soft-era is a creative studio established in 2026. We prefer stating that clearly rather than inflating experience claims." },
   { q: "What live work can you show right now?", a: "Our current live public project is Batla Medicos. It is the production reference we use in portfolio copy today." },
   { q: "Do you only take website work?", a: "Our strongest current offer is design and frontend delivery for launch-ready websites. Adjacent branding and motion support can be scoped when it directly improves the launch." },
   { q: "Can you deploy to Netlify?", a: "Yes. This site is being prepared for Netlify deployment, and we can structure new builds with deployment readiness from the start." },
@@ -57,24 +57,36 @@ const faqs = [
 ];
 
 const ease = "easeOut" as const;
+const heroBadges = ["Strategy-led", "Design-heavy", "Build-ready", "Launch-first"];
 
 function ServicesHero() {
   return (
     <section className="relative pt-36 pb-16 px-6 md:px-12 overflow-hidden">
-      <div className="absolute inset-0 grid-bg opacity-25" />
-      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 50% at 50% -5%, oklch(65% 0.28 290 / 12%) 0%, transparent 60%)" }} />
+      <div className="absolute inset-0 grid-bg opacity-20" />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 50% at 50% -5%, oklch(65% 0.28 290 / 16%) 0%, transparent 60%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 45% 35% at 10% 55%, oklch(65% 0.25 250 / 12%) 0%, transparent 65%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 45% 35% at 90% 60%, oklch(65% 0.28 330 / 10%) 0%, transparent 65%)" }} />
       <div className="max-w-6xl mx-auto">
         <motion.div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs tracking-[0.18em] uppercase mb-5 glass" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ color: "oklch(65% 0.28 290)" }}>
           <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
           Three Disciplines
         </motion.div>
-        <motion.h1 className="text-5xl md:text-7xl font-black mb-6 leading-[1.02]" style={{ fontFamily: "var(--font-sora-var)" }} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease }}>
-          Three disciplines.<br />
-          <span className="text-gradient-pp">One roof.</span>
+        <motion.h1 className="text-5xl md:text-7xl lg:text-[6rem] font-black mb-6 leading-[0.98] tracking-tight" style={{ fontFamily: "var(--font-sora-var)" }} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease }}>
+          Service architecture<br />
+          <span className="text-gradient-pp">for serious launches.</span>
         </motion.h1>
-        <motion.p className="text-base leading-relaxed max-w-xl" style={{ color: "oklch(55% 0.01 270)" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-          We currently focus on launch-ready websites, the supporting brand system around them, and the motion polish that makes them feel finished in production.
+        <motion.p className="text-base md:text-lg leading-relaxed max-w-2xl" style={{ color: "oklch(55% 0.01 270)" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+          soft-era services are designed as one connected system: strategy that sets direction, design that builds trust, and execution that ships in production with confidence.
         </motion.p>
+
+        <motion.div className="flex flex-wrap gap-2.5 mt-7" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+          {heroBadges.map((badge) => (
+            <span key={badge} className="px-3 py-1.5 rounded-full text-[11px] tracking-[0.08em] uppercase" style={{ background: "oklch(13% 0.02 270)", border: "1px solid oklch(24% 0.028 270)", color: "oklch(68% 0.01 270)" }}>
+              {badge}
+            </span>
+          ))}
+        </motion.div>
+
         {/* Anchor pills */}
         <motion.div className="flex flex-wrap gap-3 mt-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
           {services.map((s) => (
@@ -83,6 +95,44 @@ function ServicesHero() {
             </a>
           ))}
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function CreativeMoodStrip() {
+  const items = [
+    { icon: Sparkles, label: "Brand Intelligence" },
+    { icon: Layers3, label: "Interface Systems" },
+    { icon: Wand2, label: "Motion Storytelling" },
+  ];
+
+  return (
+    <section className="px-6 md:px-12 pb-12">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+        {items.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <motion.div
+              key={item.label}
+              className="relative rounded-2xl p-5 overflow-hidden"
+              style={{ background: "oklch(12% 0.018 270)", border: "1px solid oklch(20% 0.025 270)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.45 }}
+              whileHover={{ y: -4, borderColor: "oklch(65% 0.28 290 / 30%)" }}
+            >
+              <div className="absolute -right-8 -top-8 w-24 h-24 rounded-full blur-2xl" style={{ background: "oklch(65% 0.28 290 / 20%)" }} />
+              <div className="relative flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: "oklch(65% 0.28 290 / 14%)", color: "oklch(65% 0.28 290)" }}>
+                  <Icon size={16} />
+                </div>
+                <div className="text-sm font-semibold" style={{ color: "oklch(82% 0.01 270)" }}>{item.label}</div>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
@@ -140,10 +190,16 @@ function ServiceBlock({ service, index }: { service: (typeof services)[number]; 
           {/* Case study callout */}
           <motion.div className="flex-1 rounded-2xl overflow-hidden relative" style={{ background: `linear-gradient(135deg, ${service.accent.replace(")", " / 12%)")}, oklch(10% 0.015 270))`, border: `1px solid ${service.accent.replace(")", " / 25%)")}` }} whileHover={{ borderColor: service.accent.replace(")", " / 50%)") }} transition={{ duration: 0.3 }}>
             <div className="absolute inset-0 grid-bg opacity-20" />
+            <div className="absolute -bottom-12 -right-6 text-[8rem] font-black leading-none pointer-events-none" style={{ fontFamily: "var(--font-sora-var)", color: service.accent.replace(")", " / 16%)") }}>
+              {service.id}
+            </div>
             <div className="relative p-7 h-full flex flex-col justify-between">
               <div>
                 <div className="text-xs mb-6" style={{ color: service.accent.replace(")", " / 70%)"), letterSpacing: "0.1em" }}>FEATURED OUTCOME</div>
                 <div className="text-lg font-bold leading-snug mb-2" style={{ fontFamily: "var(--font-sora-var)" }}>{service.caseStudy.title}</div>
+                <p className="text-sm leading-relaxed mt-3 max-w-sm" style={{ color: "oklch(58% 0.01 270)" }}>
+                  We combine planning, execution, and delivery in one flow so quality does not drop between design and final deployment.
+                </p>
               </div>
               <a href={service.caseStudy.href} target={service.caseStudy.href.startsWith("http") ? "_blank" : undefined} rel={service.caseStudy.href.startsWith("http") ? "noreferrer" : undefined} data-cursor>
                 <motion.span className="inline-flex items-center gap-2 text-sm font-semibold" style={{ color: service.accent }} whileHover={{ x: 3 }}>
@@ -222,6 +278,7 @@ export function ServicesPage() {
   return (
     <>
       <ServicesHero />
+      <CreativeMoodStrip />
 
       {/* Lamp beam divider before service blocks */}
       <div className="w-full overflow-hidden" style={{ height: 380 }}>

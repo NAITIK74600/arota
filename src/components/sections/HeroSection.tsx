@@ -1,30 +1,40 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useMotionTemplate, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
 import Link from "next/link";
 
 const words = ["Websites", "Launches", "Interfaces", "Stores", "Frontends"];
 
 function RotatingWords() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % words.length);
+    }, 2000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <span className="relative inline-block overflow-hidden align-bottom" style={{ height: "1.05em", verticalAlign: "bottom" }}>
-      <motion.span
-        className="flex flex-col"
-        animate={{ y: ["0%", "-100%", "-200%", "-300%", "-400%", "-500%"] }}
-        transition={{
-          duration: 3.5,
-          repeat: Infinity,
-          ease: [0.76, 0, 0.24, 1],
-          times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-        }}
-        style={{ lineHeight: "1.05em" }}
-      >
-        {[...words, words[0]].map((word, i) => (
-          <span key={i} className="text-gradient block whitespace-nowrap" style={{ lineHeight: "1.05em" }}>{word}</span>
-        ))}
-      </motion.span>
+    <span
+      className="relative inline-block overflow-hidden align-bottom"
+      style={{ height: "1.05em", verticalAlign: "bottom" }}
+    >
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={index}
+          className="text-gradient block whitespace-nowrap"
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.76, 0, 0.24, 1] }}
+          style={{ lineHeight: "1.05em" }}
+        >
+          {words[index]}
+        </motion.span>
+      </AnimatePresence>
     </span>
   );
 }
@@ -140,7 +150,7 @@ export function HeroSection() {
           style={{ color: "oklch(55% 0.01 270)" }}
           variants={itemVar}
         >
-          Arota is a founder-led startup agency building clean, launch-ready digital experiences. Our first live production website is{" "}
+          soft-era is a founder-led creative studio building clean, launch-ready digital experiences. Our first live production website is{" "}
           <a href="https://batlamedicos.shop/" target="_blank" rel="noreferrer" className="underline decoration-white/30 underline-offset-4" style={{ color: "oklch(75% 0.01 270)" }}>
             batlamedicos.shop
           </a>.

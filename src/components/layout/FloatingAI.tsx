@@ -20,9 +20,9 @@ export function FloatingAIButton() {
           >
             <div className="px-5 py-4" style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290 / 12%), oklch(65% 0.28 330 / 8%))", borderBottom: "1px solid oklch(22% 0.025 270)" }}>
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black text-white" style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290), oklch(65% 0.28 330))" }}>A</div>
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black text-white" style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290), oklch(65% 0.28 330))" }}>s</div>
                 <div>
-                  <div className="text-sm font-semibold" style={{ fontFamily: "var(--font-sora-var)" }}>Arota AI</div>
+                  <div className="text-sm font-semibold" style={{ fontFamily: "var(--font-dancing-script)", fontSize: "1.1rem" }}>soft-era AI</div>
                   <div className="text-[10px] flex items-center gap-1" style={{ color: "oklch(65% 0.28 290)" }}>
                     <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
                     Online now

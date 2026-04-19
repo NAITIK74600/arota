@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Send, Mail, MapPin, Clock } from "lucide-react";
 
 const contactInfo = [
-  { icon: Mail,    label: "Email us",       value: "hello@arota.agency",       href: "mailto:hello@arota.agency" },
+  { icon: Mail,    label: "Email us",       value: "hello@soft-era.studio",       href: "mailto:hello@soft-era.studio" },
   { icon: MapPin,  label: "Based in",       value: "London · NYC · Nairobi",   href: null },
   { icon: Clock,   label: "Response time",  value: "Within 2 hours",           href: null },
 ];

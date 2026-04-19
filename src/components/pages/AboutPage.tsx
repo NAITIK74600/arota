@@ -41,15 +41,15 @@ const values = [
 ];
 
 const team = [
-  { name: "Founder-led", role: "Strategy & Delivery", bio: "Arota is being built as a direct, execution-first startup agency with production honesty as a baseline rule.", acc: "oklch(65% 0.28 330)", initials: "FL" },
+  { name: "Founder-led", role: "Strategy & Delivery", bio: "soft-era is being built as a direct, execution-first creative studio with production honesty as a baseline rule.", acc: "oklch(65% 0.28 330)", initials: "FL" },
   { name: "Design Focus", role: "Interface Systems", bio: "Layout, visual hierarchy, typography, and component consistency are handled as one system rather than disconnected page comps.", acc: "oklch(65% 0.25 250)", initials: "DF" },
   { name: "Frontend Build", role: "Next.js Delivery", bio: "We build modern, responsive frontend experiences with deployment readiness and maintainability in mind.", acc: "oklch(65% 0.28 290)", initials: "FB" },
   { name: "Launch Support", role: "QA & Deployment", bio: "The goal is not just beautiful screens. The goal is a site that can go live cleanly and stay usable after launch.", acc: "oklch(72% 0.22 210)", initials: "LS" },
 ];
 
 const timeline = [
-  { year: "2026", title: "Arota is established", desc: "The studio launches publicly with a simple rule: no inflated claims, no fictional portfolio, and no production copy we can't stand behind." },
-  { year: "2026", title: "First live project ships", desc: "Batla Medicos becomes the first public Arota launch and the current proof of delivery shown across the site." },
+  { year: "2026", title: "soft-era is established", desc: "The studio launches publicly with a simple rule: no inflated claims, no fictional portfolio, and no production copy we can't stand behind." },
+  { year: "2026", title: "First live project ships", desc: "Batla Medicos becomes the first public soft-era launch and the current proof of delivery shown across the site." },
   { year: "2026", title: "Portfolio is kept honest", desc: "Instead of filling the site with invented clients and made-up metrics, the portfolio reflects the work that is actually live today." },
   { year: "Next", title: "Selective growth", desc: "Future projects will be added as they go live. Until then, the site stays grounded in what has been built, not what sounds impressive." },
 ];
@@ -75,11 +75,11 @@ function AboutHero() {
         </motion.div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
           <motion.h1 className="text-5xl md:text-7xl font-black leading-[1.02]" style={{ fontFamily: "var(--font-sora-var)" }} initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}>
-            We built <span className="text-gradient">Arota</span><br />to start honestly.
+            We built <span className="text-gradient">soft-era</span><br />to start honestly.
           </motion.h1>
           <div>
             <motion.p className="text-base leading-relaxed mb-6" style={{ color: "oklch(55% 0.01 270)" }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              Arota is a startup agency established in 2026. We are intentionally keeping the public story simple: one live production project, a clear service offer, and no invented credibility layered on top.
+              soft-era is a creative studio established in 2026. We are intentionally keeping the public story simple: one live production project, a clear service offer, and no invented credibility layered on top.
             </motion.p>
             <motion.div className="flex gap-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
               <Link href="/#contact" data-cursor>

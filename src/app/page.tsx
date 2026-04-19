@@ -125,7 +125,7 @@ function SpiralIntro({ onEnter }: { onEnter: () => void }) {
         animate={{ opacity: 1 }}
         transition={{ duration: 2, delay: 0.2 }}
       >
-        Arota Studio
+        <span style={{ fontFamily: "var(--font-dancing-script)" }}>soft-era</span>
       </motion.div>
 
       {/* Center UI */}

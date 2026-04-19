@@ -49,9 +49,13 @@ export function Navbar() {
           transition={{ duration: 0.4 }}
         >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group" data-cursor>
-            <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black text-white" style={{ background: "linear-gradient(135deg, oklch(65% 0.28 290), oklch(65% 0.28 330))" }}>A</div>
-            <span className="font-bold tracking-tight text-lg" style={{ fontFamily: "var(--font-sora-var)" }}>Arota</span>
+          <Link href="/" className="flex items-center gap-0 group" data-cursor>
+            <span
+              className="tracking-tight text-white transition-opacity group-hover:opacity-80"
+              style={{ fontFamily: "var(--font-dancing-script)", fontSize: "1.75rem", lineHeight: 1 }}
+            >
+              soft-era
+            </span>
           </Link>
 
           {/* Desktop links */}

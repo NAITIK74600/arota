@@ -12,10 +12,10 @@ const stats = [
 ];
 
 const testimonials = [
-  { name: "Amara Osei", role: "CEO — ZuraHealth", text: "Arota took our chaotic MVP and turned it into an experience that our users brag about. The attention to detail — every transition, every loading state — was extraordinary. They're not a vendor; they're a creative partner.", avatar: "AO", accent: "oklch(65% 0.25 250)" },
+  { name: "Amara Osei", role: "CEO — ZuraHealth", text: "soft-era took our chaotic MVP and turned it into an experience that our users brag about. The attention to detail — every transition, every loading state — was extraordinary. They're not a vendor; they're a creative partner.", avatar: "AO", accent: "oklch(65% 0.25 250)" },
   { name: "Emil Strand", role: "Founder — NovaPeak", text: "The rebrand they delivered didn't just look incredible — it got us funded. Multiple investors commented specifically on our visual brand during the Series A round. Direct ROI from design. That's rare.", avatar: "ES", accent: "oklch(65% 0.28 290)" },
   { name: "Priya Nair", role: "Marketing Director — Nebula Technologies", text: "2.4 million organic views on LinkedIn for a 90-second product film. I still can't believe the quality they produced within that timeline. The CGI looked like it had a $300k budget. It didn't.", avatar: "PN", accent: "oklch(65% 0.28 330)" },
-  { name: "James Okoro", role: "CTO — Solis Energy", text: "Three web agencies had given up on our real-time data dashboard before Arota. They not only built it properly but shipped ahead of schedule. The architecture is clean enough that our own team can maintain it.", avatar: "JO", accent: "oklch(72% 0.22 210)" },
+  { name: "James Okoro", role: "CTO — Solis Energy", text: "Three web agencies had given up on our real-time data dashboard before soft-era. They not only built it properly but shipped ahead of schedule. The architecture is clean enough that our own team can maintain it.", avatar: "JO", accent: "oklch(72% 0.22 210)" },
 ];
 
 function CountUp({ target, duration = 1800 }: { target: string; duration?: number }) {
