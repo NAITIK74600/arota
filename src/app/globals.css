@@ -125,6 +125,13 @@
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Richer void background — subtle blue-purple depth tint */
+    background-color: oklch(7.5% 0.018 270);
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% 0%, oklch(65% 0.28 290 / 6%) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 30% at 0% 100%, oklch(65% 0.25 250 / 5%) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 30% at 100% 80%, oklch(65% 0.28 330 / 4%) 0%, transparent 55%);
+    background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sora-var), ui-sans-serif, system-ui, sans-serif;
