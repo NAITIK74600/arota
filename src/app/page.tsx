@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CustomCursor } from "@/components/layout/CustomCursor";
 import { PageLoader } from "@/components/layout/PageLoader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Navbar } from "@/components/layout/Navbar";
@@ -13,6 +12,7 @@ import { MarqueeTicker } from "@/components/sections/MarqueeTicker";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { ScrollStorySection } from "@/components/sections/ScrollStorySection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { SpiralAnimation } from "@/components/ui/spiral-animation";
 const PROOF_ITEMS = [
@@ -220,7 +220,6 @@ export default function Home() {
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <PageLoader />
-        <CustomCursor />
         <SmoothScroll>
           <Navbar />
           <main>
@@ -228,6 +227,7 @@ export default function Home() {
             <MarqueeTicker />
             <ServicesSection />
             <ProcessSection />
+            <ScrollStorySection />
             <ProjectsSection />
             <LaunchProofSection />
             <ContactSection />

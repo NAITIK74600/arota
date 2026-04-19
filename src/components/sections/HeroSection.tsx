@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
 import Link from "next/link";
 
@@ -26,8 +26,23 @@ function RotatingWords() {
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
+
+  // Content fades as you scroll
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
+  // Depth layers — each at a different parallax rate
+  const yFar = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);   // furthest back
+  const yMid = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);   // mid plane
+  const yNear = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);  // foreground content
+  const y = yFar; // alias for existing bg layer
+
+  // Orb scale parallax for depth sensation
+  const orbLeftY = useTransform(scrollYProgress, [0, 1], ["0%", "55%"]);
+  const orbRightY = useTransform(scrollYProgress, [0, 1], ["0%", "35%"]);
+
+  // Subtle blur on far background as it recedes
+  const farBlur = useTransform(scrollYProgress, [0, 1], [0, 4]);
+  const farFilter = useMotionTemplate`blur(${farBlur}px)`;
 
   const containerVar = {
     hidden: {},
@@ -40,29 +55,33 @@ export function HeroSection() {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6">
-      {/* Background layers */}
-      <motion.div className="absolute inset-0 pointer-events-none" style={{ y }}>
+      {/* Background layers — far plane (most parallax) */}
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: yFar, filter: farFilter }}>
         <div className="absolute inset-0 grid-bg opacity-30" />
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 90% 80% at 50% -20%, oklch(65% 0.28 290 / 14%) 0%, transparent 60%)" }} />
+      </motion.div>
+
+      {/* Mid-depth gradient fade */}
+      <motion.div className="absolute inset-0 pointer-events-none" style={{ y: yMid }}>
         <div className="absolute bottom-0 left-0 right-0 h-1/2" style={{ background: "linear-gradient(to top, oklch(8% 0.015 270), transparent)" }} />
       </motion.div>
 
-      {/* Glow orbs */}
-      <motion.div className="absolute top-1/4 -left-20 w-72 h-72 rounded-full blur-[100px] opacity-20 pointer-events-none"
-        style={{ background: "oklch(65% 0.25 250)" }}
+      {/* Glow orbs — near plane, different rates */}
+      <motion.div className="absolute top-1/4 -left-20 w-72 h-72 rounded-full blur-[100px] pointer-events-none"
+        style={{ background: "oklch(65% 0.25 250)", y: orbLeftY }}
         animate={{ scale: [1, 1.1, 1], opacity: [0.15, 0.25, 0.15] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div className="absolute bottom-1/4 -right-20 w-72 h-72 rounded-full blur-[100px] opacity-20 pointer-events-none"
-        style={{ background: "oklch(65% 0.28 330)" }}
+      <motion.div className="absolute bottom-1/4 -right-20 w-72 h-72 rounded-full blur-[100px] pointer-events-none"
+        style={{ background: "oklch(65% 0.28 330)", y: orbRightY }}
         animate={{ scale: [1.1, 1, 1.1], opacity: [0.2, 0.12, 0.2] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Content */}
+      {/* Content — near plane (least parallax) */}
       <motion.div
         className="relative z-10 max-w-5xl w-full text-center"
-        style={{ opacity }}
+        style={{ opacity, y: yNear }}
         variants={containerVar}
         initial="hidden"
         animate="visible"

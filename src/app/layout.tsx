@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Sora, Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { CanvasCursor } from "@/components/layout/CanvasCursor";
 
 const sora = Sora({
   variable: "--font-sora-var",
@@ -50,7 +49,6 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <CanvasCursor />
         {children}
       </body>
     </html>
